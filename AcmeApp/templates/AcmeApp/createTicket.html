@@ -1,0 +1,31 @@
+{% extends 'AcmeApp/base.html' %}
+{% block content %}
+<div class="flex-container">
+    Create Tickets
+</div>
+<script>
+    const obj = {
+        "ticket": {
+            "comment": {
+            "body": "The smoke is very colorful."
+            },
+            "priority": "urgent",
+            "subject": "My printer is on fire!"
+        }
+    }
+    const user = 'ajithkx@gmail.com' + '/token'
+    const api_token = 'm2g3C5zbhpfPt5jewEHTQjGKaRF9pnHtuPw10dWK'
+    fetch('https://acmesupportsupport.zendesk.com/api/v2/tickets',{
+        headers:{
+        Authorization: "ajithkx@gmail.com/token:m2g3C5zbhpfPt5jewEHTQjGKaRF9pnHtuPw10dWK"
+        },
+        method: 'GET', 
+        mode: 'no-cors',
+        auth : [user,api_token]
+    })
+  .then(response => response.json())
+//   .then(data => console.log(data))
+  .catch(e =>console.log(e))
+    </script>
+{% endblock %}
+

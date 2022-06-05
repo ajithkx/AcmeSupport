@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    
+<head>
+	<title>Login</title>
+	
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+</head>
+<body>
+
+	<div class="header_bg">
+		<img alt="" class="header_logo_img" src="{% static 'images/gear-white.png' %}">
+		<span class="header_logo_txt">Acme Support</span>
+		<div class="header_bg_color"></div>
+	</div>
+
+
+
+	<div class="login_wrapper">
+		<div class="flex_container login_box">
+			<div class="login_details">
+
+				<div class="margin-auto">
+
+					<h3 id="form-title">Sign In</h3>
+				</div>
+				<div class="flex_container form_container">
+					<form method="POST" action="" class="w-70">
+						{% csrf_token %}
+						<div class="input-group mb-1">
+							<input type="text" class="input_box" name="email" placeholder="Email Address" class="form-control">
+						</div>
+
+						<div class="input-group mb-1">
+								<input type="password" class="input_box" name="password" placeholder="Password" class="form-control" >
+						</div>
+
+							<div class="mt-3 mb-1 login_container">
+				 				<input class="btn login_btn primary" type="submit" value="Login">
+				   			</div>
+					</form>
+
+				</div>
+
+				{% for message in messages %}
+                {% csrf_token %}
+                <p id="messages">{{message}}</p>
+				{% endfor %}			
+		
+				
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

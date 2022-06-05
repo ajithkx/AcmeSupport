@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    
+<head>
+	<title>Acme Support</title>
+	
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+</head>
+<body>
+	<!-- p7G585R.VkL.N6t -->
+	<!-- m2g3C5zbhpfPt5jewEHTQjGKaRF9pnHtuPw10dWK -->
+	<nav class="header_bg">
+		<img alt="" class="header_logo_img" src="{% static 'images/gear-white.png' %}">
+		<span class="header_logo_txt">Acme Support</span>
+		<div class="header_bg_color"></div>
+		<div style="margin-left: auto;">
+			<a href="{% url 'home' %}" class="ml-3">Home</a>
+		</div>
+				
+		{% if request.user.role == 'admin' %}
+		<div>
+			<a href="{% url 'user_creation' %}" >Create New User</a>
+		</div>
+		{% endif %}
+		<div class="logout_section">
+			<div class="">
+			  <a href="{% url 'logout' %}" class="ml-3">LogOut</a>
+			</div>
+	
+		</div>
+    </nav>
+    {% block content %}
+    
+    {% endblock %}
+</body>
+</html>

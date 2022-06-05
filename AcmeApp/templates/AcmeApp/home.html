@@ -1,0 +1,12 @@
+{% extends 'AcmeApp/base.html' %}
+{% block content %}
+<div class="flex_container align-center flex-column">
+    Welcome {{ request.user.username }}
+<div class="links">
+    <a href="{% url 'createTicket' %}" >Create New Ticket</a>
+    
+</div>
+<div class="links">
+    <a href="{% url 'manageTicket' %}" >Manage Tickets</a>
+</div>
+{% endblock %}

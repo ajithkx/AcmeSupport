@@ -1,0 +1,87 @@
+{% extends 'AcmeApp/base.html' %}
+{% block content %}
+
+<div class="login_wrapper" style="margin: 1rem 0 0;">
+    <div class="flex_container login_box">
+        <div class="login_details">
+
+            <div class="margin-auto">
+
+                <h3 id="form-title">Create a New User</h3>
+            </div>
+            <div class="flex_container form_container">
+                <form method="POST" action="" class="w-70">
+                    {% csrf_token %}
+                    <div class="input-group ">
+                        Name :
+                        {{form.username}}
+                    </div>
+
+                    <div class="input-group ">
+                        Email :
+                        {{form.email}}
+                    </div>
+                    <div class="input-group ">
+                        Role :
+                        {{form.role}}
+                    </div>
+                    <div class="input-group ">
+                        Password :
+                        {{form.password1}}
+                    </div>
+                    <div class="input-group ">
+                        Confirm Password :
+                        {{form.password2}}
+                    </div>
+                    {{ form.errors }}
+
+                        <div class="mt-3  login_container">
+                             <input class="btn login_btn primary" type="submit" value="Create">
+                           </div>
+                </form>
+
+            </div>
+
+            {% for message in messages %}
+            {% csrf_token %}
+            <p id="messages">{{message}}</p>
+            {% endfor %}			
+    
+            
+        </div>
+    </div>
+</div>
+
+<!-- 
+    <div class="d-flex justify-content-center form_container">
+
+        <form method="POST" action="">
+            {% csrf_token %}
+
+            <div class="input-group mb-3">
+                Name : {{form.username}}
+            </div>
+            <div class="input-group mb-2">
+                Email : {{form.email}}
+            </div>
+            <div class="input-group mb-2">
+                Role : {{form.role}}
+            </div>
+            <div class="input-group mb-2">
+                PW1 : {{form.password1}}
+            </div>
+            <div class="input-group mb-2">
+                Pw2 : {{form.password2}}
+            </div>
+
+
+               <div class="d-flex justify-content-center mt-3 login_container">
+                 <input class="btn login_btn" type="submit" value="Register Account">
+               </div>
+
+        </form>
+               {% for message in messages %}
+                    <p>{{ messages }}</p>
+                {% endfor %}
+    </div> -->
+    {% endblock %}
