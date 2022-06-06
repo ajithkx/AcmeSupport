@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.template import context
 from .forms import CreateUserForm
+import requests
 from account.decorators import admin_only
 # Create your views here.
 
@@ -38,11 +39,25 @@ def UserCreation(request):
 
 @login_required(login_url='login')
 def manageTicket(request):
+		
 	context=[]
 	return render(request,'AcmeApp/manageTicket.html')
 
 
 @login_required(login_url='login')
 def createTicket(request):
-	context=[]
-	return render(request,'AcmeApp/createTicket.html')
+	
+	url = "https://acmesupportsupport.zendesk.com/api/v2/tickets"
+
+	payload={}
+	headers = {
+	'Authorization': 'Basic YWppdGhreEBnbWFpbC5jb20vdG9rZW46aGMwOG8zbWhLclFNUTB5SHZFMWQ0MG5MdWFPb3lyYXBac084a2l6cQ==',
+	'Cookie': '__cfruid=73c088da2a2af97d44603cb79132fdfa1b96b3ab-1654512615; _zendesk_cookie=BAhJIhl7ImRldmljZV90b2tlbnMiOnt9fQY6BkVU--459ed01949a36415c1716b5711271c3d08918307'
+	}
+
+	response = requests.request("GET", url, headers=headers, data=payload)
+
+	print(response.text)
+	context={}
+	context["res"]=response.text
+	return render(request,'AcmeApp/createTicket.html',context)

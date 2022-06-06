@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'account',
     'AcmeApp',
 ]
@@ -50,8 +51,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware'
 ]
-
+CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'AcmeSupport.urls'
 
 TEMPLATES = [
@@ -117,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# AUTH_PASSWORD_VALIDATORS=[]
+# AUTH_PASSWORD_VALIDATORS = []
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 

@@ -17,7 +17,7 @@ def admin_only(view_func):
         if request.user.role is not None:
             role = request.user.role
 
-        if role == 'admin':
+        if role == 'admin' or request.user.is_staff:
             return view_func(request, *args, **kwargs)
         else:
             return HttpResponse('You are not authorized to view this page')

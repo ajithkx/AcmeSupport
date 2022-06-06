@@ -23,7 +23,7 @@
 			<a href="{% url 'home' %}" class="ml-3">Home</a>
 		</div>
 				
-		{% if request.user.role == 'admin' %}
+		{% if request.user.role == 'admin' or request.user.is_staff %}
 		<div>
 			<a href="{% url 'user_creation' %}" >Create New User</a>
 		</div>
