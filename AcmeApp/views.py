@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.template import context
 from .forms import CreateUserForm
-import requests
+import requests,json
 from account.decorators import admin_only
 # Create your views here.
 
@@ -47,17 +47,39 @@ def manageTicket(request):
 @login_required(login_url='login')
 def createTicket(request):
 	
-	url = "https://acmesupportsupport.zendesk.com/api/v2/tickets"
-
-	payload={}
-	headers = {
-	'Authorization': 'Basic YWppdGhreEBnbWFpbC5jb20vdG9rZW46aGMwOG8zbWhLclFNUTB5SHZFMWQ0MG5MdWFPb3lyYXBac084a2l6cQ==',
-	'Cookie': '__cfruid=73c088da2a2af97d44603cb79132fdfa1b96b3ab-1654512615; _zendesk_cookie=BAhJIhl7ImRldmljZV90b2tlbnMiOnt9fQY6BkVU--459ed01949a36415c1716b5711271c3d08918307'
+        # Package the data for the API
+	data = {'request': {'subject': "Test", 'comment': {'body': "THIS IS A TEST"}}}
+	payload={
+		"ticket": {
+			"comment": {
+			"body": "The smoke is very colorful."
+			},
+			"priority": "urgent",
+			"subject": "My printer is on fire!"
+		}
 	}
+	ticket = json.dumps(payload)
+	# Make the API request
+	user = "ajithkx@gmail.com" + '/token'
+	api_token = 'hc08o3mhKrQMQ0yHvE1d40nLuaOoyrapZsO8kizq'
+	url = 'https://acmesupportsupport.zendesk.com/api/v2/tickets.json'
+	headers = {'content-type': 'application/json'}
+	r = requests.post(
+		url,
+		data=ticket,
+		auth=(user, api_token),
+		headers=headers
+	)
 
-	response = requests.request("GET", url, headers=headers, data=payload)
+	# url = "https://acmesupportsupport.zendesk.com/api/v2/tickets/"
 
-	print(response.text)
+	
+	# headers = {
+	# 'Authorization': 'Basic YWppdGhreEBnbWFpbC5jb20vdG9rZW46aGMwOG8zbWhLclFNUTB5SHZFMWQ0MG5MdWFPb3lyYXBac084a2l6cQ==',
+	# }
+
+	# response = requests.request("POST", url, headers=headers, data=payload)
+
 	context={}
-	context["res"]=response.text
+	context["res"]=r.text
 	return render(request,'AcmeApp/createTicket.html',context)
